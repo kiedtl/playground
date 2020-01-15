@@ -5,16 +5,16 @@ int
 main(void)
 {
 	// initialize array
-	int *numbers = (int*) malloc(10000 * sizeof(int));
+	int *numbers = (int*) malloc(SIZE * sizeof(int));
 
 	// populate array
-	for (int i = 0; i < 10000; i++) numbers[i] = rand();
+	for (int i = 0; i < SIZE; i++) numbers[i] = rand() % 256;
 
 	// print array
-	for (int i = 0; i < 10000; i++) {
-		if (numbers[i] > 500000000)
-			printf("%i:\tabove 500000000\n", numbers[i]);
-		else printf("%i:\tbelow 500000000\n", numbers[i]);
+	for (int i = 0; i < SIZE; i++) {
+		if (numbers[i] > 128)
+			printf("%i:\tabove 128\n", numbers[i]);
+		else printf("%i:\tbelow 128\n", numbers[i]);
 	}
 
 }
