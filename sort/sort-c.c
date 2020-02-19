@@ -40,7 +40,8 @@ int
 main(void)
 {
 	// initialize array
-	int *numbers = (int*) malloc(SIZE * sizeof(int));
+	int buf[SIZE];
+	int *numbers = &buf;
 
 	// populate array
 	for (int i = 0; i < SIZE; i++) numbers[i] = rand() % 256;

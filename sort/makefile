@@ -1,17 +1,20 @@
-SIZE ?= 500
+SIZE ?= 65535
 
-all: sort nosort
+all: sort-c sort-v #nosort
 
 clean:
-	rm sort nosort -f
+	rm -f sort #nosort
 
-sort: sort.c
-	gcc -O3 -DSIZE=$(SIZE) sort.c -o sort
+sort-c: sort-c.c
+	gcc -O4 -DSIZE=$(SIZE) sort-c.c -o sort-c
 
-nosort: nosort.c
-	gcc -O3 -DSIZE=$(SIZE) nosort.c -o nosort
+sort-v: sort-v.v
+	v -prod sort-v.v
 
-bench: sort nosort
-	hyperfine ./sort ./nosort
+#nosort: nosort.c
+#	gcc -O3 -DSIZE=$(SIZE) nosort.c -o nosort
+
+bench: sort-c sort-v #nosort
+	hyperfine ./sort-c ./sort-v #./nosort
 
 .PHONY: all bench
