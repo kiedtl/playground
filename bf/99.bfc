@@ -1,0 +1,60 @@
+var n = 99;
+while (n) {
+	var char = 0;
+
+	// "X bottles of beer on the wall"
+	outnum(n);
+	char += 32; out(char); char += 66; out(char); char += 13; out(char);
+	char +=  5; out(char); char +=  0; out(char); char -=  8; out(char);
+	char -=  7; out(char); char += 14; out(char); char -= 83; out(char);
+	char += 79; out(char); char -=  9; out(char); char -= 70; out(char);
+	char += 66; out(char); char +=  3; out(char); char +=  0; out(char);
+	char += 13; out(char); char -= 82; out(char); char += 79; out(char);
+	char -=  1; out(char); char -= 78; out(char); char += 84; out(char);
+	char -= 12; out(char); char -=  3; out(char); char -= 69; out(char);
+	char += 87; out(char); char -= 22; out(char); char += 11; out(char);
+	char +=  0; out(char);
+	out(10);
+
+	// "X bottles of beer"
+	outnum(n);
+	char = 0;
+	char += 32; out(char); char += 66; out(char); char += 13; out(char);
+	char +=  5; out(char); char +=  0; out(char); char -=  8; out(char);
+	char -=  7; out(char); char += 14; out(char); char -= 83; out(char);
+	char += 79; out(char); char -=  9; out(char); char -= 70; out(char);
+	char += 66; out(char); char +=  3; out(char); char +=  0; out(char);
+	char += 13; out(char);
+	out(10);
+
+	// "Take one down and pass it around"
+	char = 0;
+	char += 84; out(char); char += 13; out(char); char += 10; out(char);
+	char -=  6; out(char); char -= 69; out(char); char += 79; out(char);
+	char -=  1; out(char); char -=  9; out(char); char -= 69; out(char);
+	char += 68; out(char); char += 11; out(char); char +=  8; out(char);
+	char -=  9; out(char); char -= 78; out(char); char += 65; out(char);
+	char += 13; out(char); char -= 10; out(char); char -= 68; out(char);
+	char += 80; out(char); char -= 15; out(char); char += 18; out(char);
+	char +=  0; out(char); char -= 83; out(char); char += 73; out(char);
+	char += 11; out(char); char -= 84; out(char); char += 65; out(char);
+	char += 17; out(char); char -=  3; out(char); char +=  6; out(char);
+	char -=  7; out(char); char -= 10; out(char);
+	out(10);
+
+	// "(X-1) bottles of beer on the wall"
+	n -= 1;
+	outnum(n);
+	char = 0;
+	char += 32; out(char); char += 66; out(char); char += 13; out(char);
+	char +=  5; out(char); char +=  0; out(char); char -=  8; out(char);
+	char -=  7; out(char); char += 14; out(char); char -= 83; out(char);
+	char += 79; out(char); char -=  9; out(char); char -= 70; out(char);
+	char += 66; out(char); char +=  3; out(char); char +=  0; out(char);
+	char += 13; out(char); char -= 82; out(char); char += 79; out(char);
+	char -=  1; out(char); char -= 78; out(char); char += 84; out(char);
+	char -= 12; out(char); char -=  3; out(char); char -= 69; out(char);
+	char += 87; out(char); char -= 22; out(char); char += 11; out(char);
+	char +=  0; out(char);
+	out(10); out(10);
+}

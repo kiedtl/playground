@@ -1,0 +1,165 @@
+//
+//  builtins.bfc - The bfc builtins macro library
+//  Copyright (C) 2004  Clifford Wolf <clifford@clifford.at>
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation; either version 2 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+//  02111-1307  USA
+//
+
+// print a character
+macro out(char)
+{
+	"<char>.";
+}
+
+// read a character
+macro in(char)
+{
+	"<char>,";
+
+	// some implementations return -1 instead of 0
+	char += 1; if (char) char -= 1;
+}
+
+
+// logical not
+macro _not(result, v1)
+{
+	result = 1;
+	if (v1) result = 0;
+}
+
+// logical and
+macro _and(result, v1, v2)
+{
+	result = 0;
+	if (v1) if (v2) result = 1;
+}
+
+// logical or
+macro _or(result, v1, v2)
+{
+	result = 0;
+	if (v1) result = 1;
+	if (v2) result = 1;
+}
+
+// multiply
+macro _mul(result, *v1, v2)
+{
+	result = 0;
+
+	while (v1) {
+		result += v2;
+		v1 -= 1;
+	}
+}
+
+// divide
+macro _div(result, *v1, v2)
+{
+	result = 0;
+
+	while (v1) {
+		var tmp = v2;
+		while _and(v1, tmp) v1, tmp -= 1;
+		if _not(tmp) result += 1;
+	}
+}
+
+// modulo
+macro _mod(result, *v1, v2)
+{
+	var tmp = 0;
+
+	while (v1) {
+		tmp = v2;
+		while _and(v1, tmp) v1, tmp -=1 ;
+	}
+
+	result = 0;
+	if (tmp) {
+		result += v2;
+		result -= *tmp;
+	}
+}
+
+// test for equal
+macro _eq(result, *v1, *v2)
+{
+	result = 1;
+	while _and(v1, v2) v1, v2 -= 1;
+	if (v1) result = 0;
+	if (v2) result = 0;
+}
+
+// test for not equal
+macro _neq(result, *v1, *v2)
+{
+	result = 0;
+	while _and(v1, v2) v1, v2 -= 1;
+	if (v1) result = 1;
+	if (v2) result = 1;
+}
+
+// test for less than
+macro _lt(result, *v1, *v2)
+{
+	result = 0;
+	while _and(v1, v2) v1, v2 -= 1;
+	if (v2) result = 1;
+}
+
+// print a number
+macro outnum(*n)
+{
+	var d1, d2, d3;
+
+	_mod(d1, n, 10); _div(n, n, 10);
+	_mod(d2, n, 10); _div(n, n, 10);
+	_mod(d3, n, 10); _div(n, n, 10);
+
+	if (d3) {
+		d3 += 48; out(d3);
+		d2 += 48; out(d2);
+		d1 += 48; out(d1);
+	}
+	else
+		if (d2) {
+			d2 += 48; out(d2);
+			d1 += 48; out(d1);
+		} else {
+			d1 += 48; out(d1);
+		}
+}
+
+// array write (see examples/arrays.bfc)
+macro a4w(array, pos, val)
+{
+	array.0, array.1, array.2 = 0;
+	array.0 += val; array.1 += pos; "<array.1>"; 
+	'[<<<[-]<[-]<[-]+>>>>>>[<<<<+>>>>-]<-[<<<<+>>>>-]';
+	'<<<<]<<[-]>>>[<<<+>>>-]<<[>>>>]>';
+}
+
+// array read (see examples/arrays.bfc)
+macro a4r(array, pos, val)
+{
+	array.0, array.1, array.2 = 0;
+	val = 0; array.1 += pos; "<array.1>";
+	'[<<<[-]<[-]<[-]+>>>>>-[<<<<+>>>>-]<<<<]<<[->>+>+<<<]>>';
+	'[-<<+>>]<[>>[->>>>+<<<<]<<>>>>]>'; val += *array.0;
+}
+

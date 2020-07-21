@@ -1,4 +1,4 @@
-SIZE ?= 65535
+SIZE ?= 4096
 
 all: sort-c sort-v #nosort
 

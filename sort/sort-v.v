@@ -1,7 +1,7 @@
 import rand
 
 const (
-	SIZE = 65535
+	SIZE = 4096
 )
 
 fn swap(a mut &int, b mut &int) {

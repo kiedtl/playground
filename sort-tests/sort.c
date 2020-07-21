@@ -40,15 +40,13 @@ int
 main(void)
 {
 	// initialize array
-	//int buf[SIZE];
 	int *numbers = (int*) malloc(SIZE * sizeof(int));
 
 	// populate array
-	for (int i = 0; i < SIZE; i++) numbers[i] = rand() % 256;
+	for (int i = 0; i < SIZE; i++) numbers[i] = ((int) rand()) & 255;
 
 	quicksort(numbers, 0, SIZE - 1);
 
-	// print array
 	for (int i = 0; i < SIZE; i++) {
 		if (numbers[i] > 128)
 			printf("%i:\tabove 128\n", numbers[i]);
